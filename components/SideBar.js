@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { navlinks } from "../constant/index";
+import { useRouter } from "next/router";
 // Icon component
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
   <div
@@ -26,6 +27,7 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
 
 const SideBar = () => {
   const [isActive, setIsActive] = useState("dashboard");
+  const router = useRouter();
 
   return (
     <div className=" flex justify-between items-center flex-col sticky top-5 h-[93vh]">
@@ -43,22 +45,24 @@ const SideBar = () => {
         <div className=" flex flex-col justify-center items-center gap-5">
           {/* Side bar options */}
           {navlinks.map((link) => (
-            <Link href={link.link}>
-              <Icon
-                key={link.name}
-                {...link}
-                isActive={isActive}
-                handleClick={() => {
-                  if (!link.disabled) {
-                    setIsActive(link.name);
-                  }
-                }}
-              />
-            </Link>
+            <Icon
+              key={link.name}
+              {...link}
+              isActive={isActive}
+              handleClick={() => {
+                if (!link.disabled) {
+                  setIsActive(link.name);
+                  router.push(link.link);
+                }
+              }}
+            />
           ))}
         </div>
-        
-        <Icon styles="bg-[#1c1c24] shadow-secondary" imgUrl={"./assets/sun.svg"}/>
+
+        <Icon
+          styles="bg-[#1c1c24] shadow-secondary"
+          imgUrl={"./assets/sun.svg"}
+        />
       </div>
     </div>
   );

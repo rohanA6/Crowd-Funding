@@ -4,8 +4,8 @@ import SideBar from "./SideBar";
 
 const Layout = ({ children }) => {
   return (
-    <div className=" bg-[#13131a] min-h-screen font-epilogue relative lg:p-4 p-8 flex flex-row">
-      <div className=" relative sm:flex hidden mr-10">
+    <div className=" relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
+      <div className=" sm:flex hidden mr-10 relative">
         <SideBar />
       </div>
 
